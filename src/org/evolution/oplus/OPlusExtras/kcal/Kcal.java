@@ -65,79 +65,73 @@ public class Kcal extends PreferenceFragment
         addPreferencesFromResource(R.xml.kcal);
 
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Context context = getContext();
 
         // Red preference
-        String nodeRed = getResources().getString(R.string.node_red_preference);
         mRedPreference =  (CustomSeekBarPreference) findPreference(KEY_RED);
-        if (Utils.fileWritable(nodeRed)) {
+        if (Utils.fileWritable(KcalNodes.nodeRed(context))) {
             mRedPreference.setValue(sharedPrefs.getInt(KEY_RED,
-                Integer.parseInt(Utils.getFileValue(nodeRed, RED_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeRed(context), RED_DEFAULT))));
             mRedPreference.setOnPreferenceChangeListener(this);
         } else {
             mRedPreference.setEnabled(false);
         }
 
         // Green preference
-        String nodeGreen = getResources().getString(R.string.node_green_preference);
         mGreenPreference =  (CustomSeekBarPreference) findPreference(KEY_GREEN);
-        if (Utils.fileWritable(nodeGreen)) {
+        if (Utils.fileWritable(KcalNodes.nodeGreen(context))) {
             mGreenPreference.setValue(sharedPrefs.getInt(KEY_GREEN,
-                Integer.parseInt(Utils.getFileValue(nodeGreen, GREEN_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeGreen(context), GREEN_DEFAULT))));
             mGreenPreference.setOnPreferenceChangeListener(this);
         } else {
             mGreenPreference.setEnabled(false);
         }
 
         // Blue preference
-        String nodeBlue = getResources().getString(R.string.node_blue_preference);
         mBluePreference =  (CustomSeekBarPreference) findPreference(KEY_BLUE);
-        if (Utils.fileWritable(nodeBlue)) {
+        if (Utils.fileWritable(KcalNodes.nodeBlue(context))) {
             mBluePreference.setValue(sharedPrefs.getInt(KEY_BLUE,
-                Integer.parseInt(Utils.getFileValue(nodeBlue, BLUE_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeBlue(context), BLUE_DEFAULT))));
             mBluePreference.setOnPreferenceChangeListener(this);
         } else {
             mBluePreference.setEnabled(false);
         }
 
         // Saturation preference
-        String nodeSaturation = getResources().getString(R.string.node_saturation_preference);
         mSaturationPreference =  (CustomSeekBarPreference) findPreference(KEY_SATURATION);
-        if (Utils.fileWritable(nodeSaturation)) {
+        if (Utils.fileWritable(KcalNodes.nodeSaturation(context))) {
             mSaturationPreference.setValue(sharedPrefs.getInt(KEY_SATURATION,
-                Integer.parseInt(Utils.getFileValue(nodeSaturation, SATURATION_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeSaturation(context), SATURATION_DEFAULT))));
             mSaturationPreference.setOnPreferenceChangeListener(this);
         } else {
             mSaturationPreference.setEnabled(false);
         }
 
         // Contrast preference
-        String nodeContrast = getResources().getString(R.string.node_contrast_preference);
         mContrastPreference =  (CustomSeekBarPreference) findPreference(KEY_CONTRAST);
-        if (Utils.fileWritable(nodeContrast)) {
+        if (Utils.fileWritable(KcalNodes.nodeContrast(context))) {
             mContrastPreference.setValue(sharedPrefs.getInt(KEY_CONTRAST,
-                Integer.parseInt(Utils.getFileValue(nodeContrast, CONTRAST_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeContrast(context), CONTRAST_DEFAULT))));
             mContrastPreference.setOnPreferenceChangeListener(this);
         } else {
             mContrastPreference.setEnabled(false);
         }
 
         // Hue preference
-        String nodeHue = getResources().getString(R.string.node_hue_preference);
         mHuePreference =  (CustomSeekBarPreference) findPreference(KEY_HUE);
-        if (Utils.fileWritable(nodeHue)) {
+        if (Utils.fileWritable(KcalNodes.nodeHue(context))) {
             mHuePreference.setValue(sharedPrefs.getInt(KEY_HUE,
-                Integer.parseInt(Utils.getFileValue(nodeHue, HUE_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeHue(context), HUE_DEFAULT))));
             mHuePreference.setOnPreferenceChangeListener(this);
         } else {
             mHuePreference.setEnabled(false);
         }
 
         // Value preference
-        String nodeValue = getResources().getString(R.string.node_value_preference);
         mValuePreference =  (CustomSeekBarPreference) findPreference(KEY_VALUE);
-        if (Utils.fileWritable(nodeValue)) {
+        if (Utils.fileWritable(KcalNodes.nodeValue(context))) {
             mValuePreference.setValue(sharedPrefs.getInt(KEY_VALUE,
-                Integer.parseInt(Utils.getFileValue(nodeValue, VALUE_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeValue(context), VALUE_DEFAULT))));
             mValuePreference.setOnPreferenceChangeListener(this);
         } else {
             mValuePreference.setEnabled(false);
@@ -151,56 +145,49 @@ public class Kcal extends PreferenceFragment
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_RED, value).commit();
-            String nodeRed = getContext().getResources().getString(R.string.node_red_preference);
-            Utils.writeValue(nodeRed, String.valueOf(value));
+            Utils.writeValue(KcalNodes.nodeRed(getContext()), String.valueOf(value));
             return true;
         // Green preference
         } else if (preference == mGreenPreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_GREEN, value).commit();
-            String nodeGreen = getContext().getResources().getString(R.string.node_green_preference);
-            Utils.writeValue(nodeGreen, String.valueOf(value));
+            Utils.writeValue(KcalNodes.nodeGreen(getContext()), String.valueOf(value));
             return true;
         // Blue preference
         } else if (preference == mBluePreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_BLUE, value).commit();
-            String nodeBlue = getContext().getResources().getString(R.string.node_blue_preference);
-            Utils.writeValue(nodeBlue, String.valueOf(value));
+            Utils.writeValue(KcalNodes.nodeBlue(getContext()), String.valueOf(value));
             return true;
         // Saturation preference
         } else if (preference == mSaturationPreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_SATURATION, value).commit();
-            String nodeSaturation = getContext().getResources().getString(R.string.node_saturation_preference);
-            Utils.writeValue(nodeSaturation, String.valueOf(value));
+            Utils.writeValue(KcalNodes.nodeSaturation(getContext()), String.valueOf(value));
             return true;
         // Contrast preference
         } else if (preference == mContrastPreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_CONTRAST, value).commit();
-            String nodeContrast = getContext().getResources().getString(R.string.node_contrast_preference);
-            Utils.writeValue(nodeContrast, String.valueOf(value));
+            Utils.writeValue(KcalNodes.nodeContrast(getContext()), String.valueOf(value));
             return true;
         // Hue preference
         } else if (preference == mHuePreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_HUE, value).commit();
-            String nodeHue = getContext().getResources().getString(R.string.node_hue_preference);
-            Utils.writeValue(nodeHue, String.valueOf(value));
+            Utils.writeValue(KcalNodes.nodeHue(getContext()), String.valueOf(value));
             return true;
         // Value preference
         } else if (preference == mValuePreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_VALUE, value).commit();
-            String nodeValue = getResources().getString(R.string.node_value_preference);
-            Utils.writeValue(nodeValue, String.valueOf(value));
+            Utils.writeValue(KcalNodes.nodeValue(getContext()), String.valueOf(value));
             return true;
         }
 
@@ -209,78 +196,71 @@ public class Kcal extends PreferenceFragment
 
     // Red preference
     public static void restoreRedSetting(Context context) {
-        String nodeRed = context.getResources().getString(R.string.node_red_preference);
-        if (Utils.fileWritable(nodeRed)) {
+        if (Utils.fileWritable(KcalNodes.nodeRed(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_RED,
-                Integer.parseInt(Utils.getFileValue(nodeRed, RED_DEFAULT)));
-            Utils.writeValue(nodeRed, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeRed(context), RED_DEFAULT)));
+            Utils.writeValue(KcalNodes.nodeRed(context), String.valueOf(value));
         }
     }
 
     // Green preference
     public static void restoreGreenSetting(Context context) {
-        String nodeGreen = context.getResources().getString(R.string.node_green_preference);
-        if (Utils.fileWritable(nodeGreen)) {
+        if (Utils.fileWritable(KcalNodes.nodeGreen(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_GREEN,
-                Integer.parseInt(Utils.getFileValue(nodeGreen, GREEN_DEFAULT)));
-            Utils.writeValue(nodeGreen, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeGreen(context), GREEN_DEFAULT)));
+            Utils.writeValue(KcalNodes.nodeGreen(context), String.valueOf(value));
         }
     }
 
     // Blue preference
     public static void restoreBlueSetting(Context context) {
-        String nodeBlue = context.getResources().getString(R.string.node_blue_preference);
-        if (Utils.fileWritable(nodeBlue)) {
+        if (Utils.fileWritable(KcalNodes.nodeBlue(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_BLUE,
-                Integer.parseInt(Utils.getFileValue(nodeBlue, BLUE_DEFAULT)));
-            Utils.writeValue(nodeBlue, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeBlue(context), BLUE_DEFAULT)));
+            Utils.writeValue(KcalNodes.nodeBlue(context), String.valueOf(value));
         }
     }
 
     // Saturation preference
     public static void restoreSaturationSetting(Context context) {
-        String nodeSaturation = context.getResources().getString(R.string.node_saturation_preference);
-        if (Utils.fileWritable(nodeSaturation)) {
+        if (Utils.fileWritable(KcalNodes.nodeSaturation(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_SATURATION,
-                Integer.parseInt(Utils.getFileValue(nodeSaturation, SATURATION_DEFAULT)));
-            Utils.writeValue(nodeSaturation, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeSaturation(context), SATURATION_DEFAULT)));
+            Utils.writeValue(KcalNodes.nodeSaturation(context), String.valueOf(value));
         }
     }
 
     // Contrast preference
     public static void restoreContrastSetting(Context context) {
-        String nodeContrast = context.getResources().getString(R.string.node_contrast_preference);
-        if (Utils.fileWritable(nodeContrast)) {
+        if (Utils.fileWritable(KcalNodes.nodeContrast(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_CONTRAST,
-                Integer.parseInt(Utils.getFileValue(nodeContrast, CONTRAST_DEFAULT)));
-            Utils.writeValue(nodeContrast, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeContrast(context), CONTRAST_DEFAULT)));
+            Utils.writeValue(KcalNodes.nodeContrast(context), String.valueOf(value));
         }
     }
 
     // Hue preference
     public static void restoreHueSetting(Context context) {
-        String nodeHue = context.getResources().getString(R.string.node_hue_preference);
-        if (Utils.fileWritable(nodeHue)) {
+        if (Utils.fileWritable(KcalNodes.nodeHue(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_HUE,
-                Integer.parseInt(Utils.getFileValue(nodeHue, HUE_DEFAULT)));
-            Utils.writeValue(nodeHue, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeHue(context), HUE_DEFAULT)));
+            Utils.writeValue(KcalNodes.nodeHue(context), String.valueOf(value));
         }
     }
 
     // Value preference
     public static void restoreValueSetting(Context context) {
-        String nodeValue = context.getResources().getString(R.string.node_value_preference);
-        if (Utils.fileWritable(nodeValue)) {
+        if (Utils.fileWritable(KcalNodes.nodeValue(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_VALUE,
-                Integer.parseInt(Utils.getFileValue(nodeValue, VALUE_DEFAULT)));
-            Utils.writeValue(nodeValue, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(KcalNodes.nodeValue(context), VALUE_DEFAULT)));
+            Utils.writeValue(KcalNodes.nodeValue(context), String.valueOf(value));
         }
     }
 }

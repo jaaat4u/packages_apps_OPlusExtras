@@ -145,6 +145,7 @@ public class OPlusExtras extends PreferenceFragment
 
         mVibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Context context = getContext();
 
          // OPlusExtras categories
          PreferenceCategory[] categories = new PreferenceCategory[] {
@@ -168,8 +169,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // Power efficient workqueue switch
         mPowerEfficientWorkqueueModeSwitch = (SwitchPreference) findPreference(KEY_POWER_EFFICIENT_WORKQUEUE);
-        String nodePowerEfficientWorkqueue = getResources().getString(R.string.node_power_efficient_workqueue_switch);
-        if (Utils.fileWritable(nodePowerEfficientWorkqueue)) {
+        if (Utils.fileWritable(Nodes.nodePowerEfficientWorkqueue(context))) {
             mPowerEfficientWorkqueueModeSwitch.setEnabled(true);
             mPowerEfficientWorkqueueModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_POWER_EFFICIENT_WORKQUEUE, false));
             mPowerEfficientWorkqueueModeSwitch.setOnPreferenceChangeListener(this);
@@ -183,8 +183,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // MSM touchboost switch
         mTouchboostModeSwitch = (SwitchPreference) findPreference(KEY_TOUCHBOOST);
-        String nodeTouchboost = getResources().getString(R.string.node_touchboost_switch);
-        if (Utils.fileWritable(nodeTouchboost)) {
+        if (Utils.fileWritable(Nodes.nodeTouchboost(context))) {
             mTouchboostModeSwitch.setEnabled(true);
             mTouchboostModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_TOUCHBOOST, false));
             mTouchboostModeSwitch.setOnPreferenceChangeListener(this);
@@ -203,8 +202,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // Anti-flicker switch
         mAntiFlickerModeSwitch = (SwitchPreference) findPreference(KEY_ANTIFLICKER);
-        String nodeAntiFlicker = getResources().getString(R.string.node_antiflicker_switch);
-        if (Utils.fileWritable(nodeAntiFlicker)) {
+        if (Utils.fileWritable(Nodes.nodeAntiFlicker(context))) {
             mAntiFlickerModeSwitch.setEnabled(true);
             mAntiFlickerModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_ANTIFLICKER, false));
             mAntiFlickerModeSwitch.setOnPreferenceChangeListener(this);
@@ -219,8 +217,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // High brightness mode switch
         mHBMModeSwitch = (SwitchPreference) findPreference(KEY_HBM);
-        String nodeHBM = getResources().getString(R.string.node_hbm_switch);
-        if (Utils.fileWritable(nodeHBM)) {
+        if (Utils.fileWritable(Nodes.nodeHBM(context))) {
             mHBMModeSwitch.setEnabled(true);
             mHBMModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_HBM, false));
             mHBMModeSwitch.setOnPreferenceChangeListener(this);
@@ -240,8 +237,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // Keep PCC enabled switch
         mKeepPCCModeSwitch = (SwitchPreference) findPreference(KEY_KEEP_PCC);
-        String nodeKeepPCC = getResources().getString(R.string.node_keep_pcc_switch);
-        if (Utils.fileWritable(nodeKeepPCC)) {
+        if (Utils.fileWritable(Nodes.nodeKeepPCC(context))) {
             mKeepPCCModeSwitch.setEnabled(true);
             mKeepPCCModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_KEEP_PCC, false));
             mKeepPCCModeSwitch.setOnPreferenceChangeListener(this);
@@ -255,10 +251,9 @@ public class OPlusExtras extends PreferenceFragment
 
         // Maximum brightness preference
         mMaxBrightnessPreference =  (CustomSeekBarPreference) findPreference(KEY_MAX_BRIGHTNESS);
-        String nodeMaxBrightness = getResources().getString(R.string.node_max_brightness_preference);
-        if (Utils.fileWritable(nodeMaxBrightness)) {
+        if (Utils.fileWritable(Nodes.nodeMaxBrightness(context))) {
             mMaxBrightnessPreference.setValue(sharedPrefs.getInt(KEY_MAX_BRIGHTNESS,
-                Integer.parseInt(Utils.getFileValue(nodeMaxBrightness, MAX_BRIGHTNESS_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeMaxBrightness(context), MAX_BRIGHTNESS_DEFAULT))));
             mMaxBrightnessPreference.setOnPreferenceChangeListener(this);
         } else {
             mMaxBrightnessPreference.setEnabled(false);
@@ -280,8 +275,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // Fsync switch
         mFSyncSwitch = (SwitchPreference) findPreference(KEY_FSYNC);
-        String nodeFSync = getResources().getString(R.string.node_fsync_switch);
-        if (Utils.fileWritable(nodeFSync)) {
+        if (Utils.fileWritable(Nodes.nodeFSync(context))) {
             mFSyncSwitch.setEnabled(true);
             mFSyncSwitch.setChecked(sharedPrefs.getBoolean(KEY_FSYNC, true));
             mFSyncSwitch.setOnPreferenceChangeListener(this);
@@ -296,10 +290,9 @@ public class OPlusExtras extends PreferenceFragment
 
         // Adrenoboost preference
         mAdrenoboostPreference =  (CustomSeekBarPreference) findPreference(KEY_ADRENOBOOST);
-        String nodeAdrenoboost = getResources().getString(R.string.node_adrenoboost_preference);
-        if (Utils.fileWritable(nodeAdrenoboost)) {
+        if (Utils.fileWritable(Nodes.nodeAdrenoboost(context))) {
             mAdrenoboostPreference.setValue(sharedPrefs.getInt(KEY_ADRENOBOOST,
-                Integer.parseInt(Utils.getFileValue(nodeAdrenoboost, ADRENOBOOST_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeAdrenoboost(context), ADRENOBOOST_DEFAULT))));
             mAdrenoboostPreference.setOnPreferenceChangeListener(this);
         } else {
             mAdrenoboostPreference.setEnabled(false);
@@ -311,10 +304,9 @@ public class OPlusExtras extends PreferenceFragment
 
         // Mic gain preference
         mMicGainPreference =  (CustomSeekBarPreference) findPreference(KEY_MIC_GAIN);
-        String nodeMicGain = getResources().getString(R.string.node_microphone_gain_preference);
-        if (Utils.fileWritable(nodeMicGain)) {
+        if (Utils.fileWritable(Nodes.nodeMicGain(context))) {
             mMicGainPreference.setValue(sharedPrefs.getInt(KEY_MIC_GAIN,
-                Integer.parseInt(Utils.getFileValue(nodeMicGain, MIC_GAIN_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeMicGain(context), MIC_GAIN_DEFAULT))));
             mMicGainPreference.setOnPreferenceChangeListener(this);
         } else {
             mMicGainPreference.setEnabled(false);
@@ -326,10 +318,9 @@ public class OPlusExtras extends PreferenceFragment
 
         // Speaker gain preference
         mSpeakerGainPreference =  (CustomSeekBarPreference) findPreference(KEY_SPEAKER_GAIN);
-        String nodeSpeakerGain = getResources().getString(R.string.node_speaker_gain_preference);
-        if (Utils.fileWritable(nodeSpeakerGain)) {
+        if (Utils.fileWritable(Nodes.nodeSpeakerGain(context))) {
             mSpeakerGainPreference.setValue(sharedPrefs.getInt(KEY_SPEAKER_GAIN,
-                Integer.parseInt(Utils.getFileValue(nodeSpeakerGain, SPEAKER_GAIN_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeSpeakerGain(context), SPEAKER_GAIN_DEFAULT))));
             mSpeakerGainPreference.setOnPreferenceChangeListener(this);
         } else {
             mSpeakerGainPreference.setEnabled(false);
@@ -341,8 +332,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // Powershare switch
         mPowershareModeSwitch = (SwitchPreference) findPreference(KEY_POWERSHARE);
-        String nodePowershare = getResources().getString(R.string.node_powershare_switch);
-        if (Utils.fileWritable(nodePowershare)) {
+        if (Utils.fileWritable(Nodes.nodePowershare(context))) {
             mPowershareModeSwitch.setEnabled(true);
             mPowershareModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_POWERSHARE, false));
             mPowershareModeSwitch.setOnPreferenceChangeListener(this);
@@ -356,8 +346,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // OEM wireless charger quiet mode switch
         mQuietModeSwitch = (SwitchPreference) findPreference(KEY_QUIET_MODE);
-        String nodeQuietMode = getResources().getString(R.string.node_quiet_mode_switch);
-        if (Utils.fileWritable(nodeQuietMode)) {
+        if (Utils.fileWritable(Nodes.nodeQuietMode(context))) {
             mQuietModeSwitch.setEnabled(true);
             mQuietModeSwitch.setChecked(sharedPrefs.getBoolean(KEY_QUIET_MODE, false));
             mQuietModeSwitch.setOnPreferenceChangeListener(this);
@@ -371,8 +360,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // Edge limit switch
         mEdgeLimitSwitch = (SwitchPreference) findPreference(KEY_EDGE_LIMIT);
-        String EdgeLimit = getResources().getString(R.string.node_edge_limit_switch);
-        if (Utils.fileWritable(nodeEdgeLimit)) {
+        if (Utils.fileWritable(Nodes.nodeEdgeLimit(context))) {
             mEdgeLimitSwitch.setEnabled(true);
             mEdgeLimitSwitch.setChecked(sharedPrefs.getBoolean(KEY_EDGE_LIMIT, false));
             mEdgeLimitSwitch.setOnPreferenceChangeListener(this);
@@ -386,8 +374,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // High touch polling rate switch
         mHighTouchPollingRateSwitch = (SwitchPreference) findPreference(KEY_HIGH_TOUCH_POLLING_RATE);
-        String nodeHighTouchPollingRate = getResources().getString(R.string.node_high_touch_polling_rate_switch);
-        if (Utils.fileWritable(nodeHighTouchPollingRate)) {
+        if (Utils.fileWritable(Nodes.nodeHighTouchPollingRate(context))) {
             mHighTouchPollingRateSwitch.setEnabled(true);
             mHighTouchPollingRateSwitch.setChecked(sharedPrefs.getBoolean(KEY_HIGH_TOUCH_POLLING_RATE, false));
             mHighTouchPollingRateSwitch.setOnPreferenceChangeListener(this);
@@ -407,8 +394,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // USB 2.0 fast charge switch
         mUSB2FastChargeSwitch = (SwitchPreference) findPreference(KEY_USB2_FAST_CHARGE);
-        String nodeUSB2FastCharge = getResources().getString(R.string.node_usb2_fast_charge_switch);
-        if (Utils.fileWritable(nodeUSB2FastCharge)) {
+        if (Utils.fileWritable(Nodes.nodeUSB2FastCharge(context))) {
             mUSB2FastChargeSwitch.setEnabled(true);
             mUSB2FastChargeSwitch.setChecked(sharedPrefs.getBoolean(KEY_USB2_FAST_CHARGE, false));
             mUSB2FastChargeSwitch.setOnPreferenceChangeListener(this);
@@ -423,8 +409,7 @@ public class OPlusExtras extends PreferenceFragment
 
         // USB-OTG switch
         mUSBOTGSwitch = (SwitchPreference) findPreference(KEY_USB_OTG);
-        String nodeOTG = getResources().getString(R.string.node_usb_otg_switch);
-        if (Utils.fileWritable(nodeOTG)) {
+        if (Utils.fileWritable(Nodes.nodeOTG(context))) {
             mUSBOTGSwitch.setEnabled(true);
             mUSBOTGSwitch.setChecked(sharedPrefs.getBoolean(KEY_USB_OTG, false));
             mUSBOTGSwitch.setOnPreferenceChangeListener(this);
@@ -438,10 +423,9 @@ public class OPlusExtras extends PreferenceFragment
 
         // Vibrator strength preference
         mVibratorStrengthPreference =  (CustomSeekBarPreference) findPreference(KEY_VIBRATOR_STRENGTH);
-        String nodeVibratorStrength = getResources().getString(R.string.node_vibrator_strength_preference);
-        if (Utils.fileWritable(nodeVibratorStrength)) {
+        if (Utils.fileWritable(Nodes.nodeVibratorStrength(context))) {
             mVibratorStrengthPreference.setValue(sharedPrefs.getInt(KEY_VIBRATOR_STRENGTH,
-                Integer.parseInt(Utils.getFileValue(nodeVibratorStrength, VIBRATOR_STRENGTH_DEFAULT))));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeVibratorStrength(context), VIBRATOR_STRENGTH_DEFAULT))));
             mVibratorStrengthPreference.setOnPreferenceChangeListener(this);
         } else {
             mVibratorStrengthPreference.setEnabled(false);
@@ -492,136 +476,119 @@ public class OPlusExtras extends PreferenceFragment
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_POWER_EFFICIENT_WORKQUEUE, enabled).commit();
-            String nodePowerEfficientWorkqueue = getContext().getResources().getString(R.string.node_power_efficient_workqueue_switch);
-            Utils.writeValue(nodePowerEfficientWorkqueue, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodePowerEfficientWorkqueue(getContext()), enabled ? "1" : "0");
             return true;
         // MSM touchboost switch
         } else if  (preference == mTouchboostModeSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_TOUCHBOOST, enabled).commit();
-            String nodeTouchboost = getContext().getResources().getString(R.string.node_touchboost_switch);
-            Utils.writeValue(nodeTouchboost, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeTouchboost(getContext()), enabled ? "1" : "0");
             return true;
         // Anti-flicker switch
         } else if (preference == mAntiFlickerModeSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_ANTIFLICKER, enabled).commit();
-            String nodeAntiFlicker = getContext().getResources().getString(R.string.node_antiflicker_switch);
-            Utils.writeValue(nodeAntiFlicker, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeAntiFlicker(getContext()), enabled ? "1" : "0");
             return true;
         // High brightness mode switch
         } else if (preference == mHBMModeSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_HBM, enabled).commit();
-            String nodeHBM = getContext().getResources().getString(R.string.node_hbm_switch);
-            Utils.writeValue(nodeHBM, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeHBM(getContext()), enabled ? "1" : "0");
             return true;
         // Maximum brightness preference
         } else if (preference == mMaxBrightnessPreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_MAX_BRIGHTNESS, value).commit();
-            String nodeMaxBrightness = getContext().getResources().getString(R.string.node_max_brightness_preference);
-            Utils.writeValue(nodeMaxBrightness, String.valueOf(value));
+            Utils.writeValue(Nodes.nodeMaxBrightness(getContext()), String.valueOf(value));
             return true;
         // Keep PCC enabled switch
         } else if  (preference == mKeepPCCModeSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_KEEP_PCC, enabled).commit();
-            String nodeKeepPCC = getContext().getResources().getString(R.string.node_keep_pcc_switch);
-            Utils.writeValue(nodeKeepPCC, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeKeepPCC(getContext()), enabled ? "1" : "0");
             return true;
         // Fsync switch
         } else if (preference == mFSyncSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_FSYNC, enabled).commit();
-            String nodeFSync = getContext().getResources().getString(R.string.node_fsync_switch);
-    	    Utils.writeValue(nodeFSync, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeFSync(getContext()), enabled ? "1" : "0");
             return true;
         // Adrenoboost preference
         } else if (preference == mAdrenoboostPreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_ADRENOBOOST, value).commit();
-            String nodeAdrenoboost = getContext().getResources().getString(R.string.node_adrenoboost_preference);
-            Utils.writeValue(nodeAdrenoboost, String.valueOf(value));
+            Utils.writeValue(Nodes.nodeTouchboost(getContext()), String.valueOf(value));
             return true;
         // Powershare switch
         } else if (preference == mPowershareModeSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_POWERSHARE, enabled).commit();
-            String nodePowershare = getContext().getResources().getString(R.string.node_powershare_switch);
-            Utils.writeValue(nodePowershare, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodePowershare(getContext()), enabled ? "1" : "0");
             return true;
         // OEM wireless charger quiet mode switch
         } else if (preference == mQuietModeSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_QUIET_MODE, enabled).commit();
-            String nodeQuietMode = getContext().getResources().getString(R.string.node_quiet_mode_switch);
-            Utils.writeValue(nodeQuietMode, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeQuietMode(getContext()), enabled ? "1" : "0");
             return true;
         // Mic gain preference
         } else if (preference == mMicGainPreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_MIC_GAIN, value).commit();
-            String nodeMicGain = getContext().getResources().getString(R.string.node_microphone_gain_preference);
-            Utils.writeValue(nodeMicGain, String.valueOf(value));
+            Utils.writeValue(Nodes.nodeMicGain(getContext()), String.valueOf(value));
             return true;
         // Speaker gain preference
         } else if (preference == mSpeakerGainPreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_SPEAKER_GAIN, value).commit();
-            String nodeSpeakerGain = getContext().getResources().getString(R.string.node_speaker_gain_preference);
-            Utils.writeValue(nodeSpeakerGain, String.valueOf(value));
+            Utils.writeValue(Nodes.nodeSpeakerGain(getContext()), String.valueOf(value));
             return true;
         // Edge limit switch
         } else if (preference == mEdgeLimitSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_EDGE_LIMIT, enabled).commit();
-            String nodeEdgeLimit = getContext().getResources().getString(R.string.node_edge_limit_switch);
-            Utils.writeValue(nodeEdgeLimit, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeEdgeLimit(getContext()), enabled ? "1" : "0");
             return true;
         // High touch polling rate switch
         } else if (preference == mHighTouchPollingRateSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_HIGH_TOUCH_POLLING_RATE, enabled).commit();
-            String nodeHightTouchPollingRate = getContext().getResources().getString(R.string.node_high_touch_polling_rate_switch);
-            Utils.writeValue(nodeHightTouchPollingRate, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeHighTouchPollingRate(getContext()), enabled ? "1" : "0");
             return true;
         // USB 2.0 fast charge switch
         } else if (preference == mUSB2FastChargeSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_USB2_FAST_CHARGE, enabled).commit();
-            String nodeUSB2FastCharge = getContext().getResources().getString(R.string.node_usb2_fast_charge_switch);
-            Utils.writeValue(nodeUSB2FastCharge, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeUSB2FastCharge(getContext()), enabled ? "1" : "0");
             return true;
         // USB-OTG switch
         } else if (preference == mUSBOTGSwitch) {
             boolean enabled = (Boolean) newValue;
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putBoolean(KEY_USB_OTG, enabled).commit();
-            String nodeOTG = getContext().getResources().getString(R.string.node_usb_otg_switch);
-    	    Utils.writeValue(nodeOTG, enabled ? "1" : "0");
+            Utils.writeValue(Nodes.nodeOTG(getContext()), enabled ? "1" : "0");
             return true;
         // Vibrator strength preference
         } else if (preference == mVibratorStrengthPreference) {
             int value = Integer.parseInt(newValue.toString());
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             sharedPrefs.edit().putInt(KEY_VIBRATOR_STRENGTH, value).commit();
-            String nodeVibratorStrength = getContext().getResources().getString(R.string.node_vibrator_strength_preference);
-            Utils.writeValue(nodeVibratorStrength, String.valueOf(value));
+            Utils.writeValue(Nodes.nodeVibratorStrength(getContext()), String.valueOf(value));
             mVibrator.vibrate(testVibrationPattern, -1);
             return true;
         }
@@ -916,176 +883,159 @@ public class OPlusExtras extends PreferenceFragment
 
     // Power efficient workqueue switch
     public static void restorePowerEfficientWorkqueueSetting(Context context) {
-        String nodePowerEfficientWorkqueue = context.getResources().getString(R.string.node_power_efficient_workqueue_switch);
-        if (Utils.fileWritable(nodePowerEfficientWorkqueue)) {
+        if (Utils.fileWritable(Nodes.nodePowerEfficientWorkqueue(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_POWER_EFFICIENT_WORKQUEUE, false);
-            Utils.writeValue(nodePowerEfficientWorkqueue, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodePowerEfficientWorkqueue(context), value ? "1" : "0");
         }
     }
 
     // MSM touchboost switch
     public static void restoreTouchboostSetting(Context context) {
-        String nodeTouchboost = context.getResources().getString(R.string.node_touchboost_switch);
-        if (Utils.fileWritable(nodeTouchboost)) {
+        if (Utils.fileWritable(Nodes.nodeTouchboost(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_TOUCHBOOST, false);
-            Utils.writeValue(nodeTouchboost, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeTouchboost(context), value ? "1" : "0");
         }
     }
 
     // Anti-flicker switch
     public static void restoreAntiFlickerSetting(Context context) {
-        String nodeAntiFlicker = context.getResources().getString(R.string.node_antiflicker_switch);
-        if (Utils.fileWritable(nodeAntiFlicker)) {
+        if (Utils.fileWritable(Nodes.nodeAntiFlicker(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_ANTIFLICKER, false);
-            Utils.writeValue(nodeAntiFlicker, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeAntiFlicker(context), value ? "1" : "0");
         }
     }
 
     // High brightness mode switch
     public static void restoreHBMSetting(Context context) {
-        String nodeHBM = context.getResources().getString(R.string.node_hbm_switch);
-        if (Utils.fileWritable(nodeHBM)) {
+        if (Utils.fileWritable(Nodes.nodeHBM(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_HBM, false);
-            Utils.writeValue(nodeHBM, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeHBM(context), value ? "1" : "0");
         }
     }
 
     // Keep PCC enabled switch
     public static void restoreKeepPCCSetting(Context context) {
-        String nodeKeepPCC = context.getResources().getString(R.string.node_keep_pcc_switch);
-        if (Utils.fileWritable(nodeKeepPCC)) {
+        if (Utils.fileWritable(Nodes.nodeKeepPCC(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_KEEP_PCC, false);
-            Utils.writeValue(nodeKeepPCC, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeKeepPCC(context), value ? "1" : "0");
         }
     }
 
     // Maximum brightness preference
     public static void restoreMaxBrightnessSetting(Context context) {
-        String nodeMaxBrightness = context.getResources().getString(R.string.node_max_brightness_preference);
-        if (Utils.fileWritable(nodeMaxBrightness)) {
+        if (Utils.fileWritable(Nodes.nodeMaxBrightness(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_MAX_BRIGHTNESS,
-                Integer.parseInt(Utils.getFileValue(nodeMaxBrightness, MAX_BRIGHTNESS_DEFAULT)));
-            Utils.writeValue(nodeMaxBrightness, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeMaxBrightness(context), MAX_BRIGHTNESS_DEFAULT)));
+            Utils.writeValue(Nodes.nodeMaxBrightness(context), String.valueOf(value));
         }
     }
 
     // Fsync switch
     public static void restoreFSyncSetting(Context context) {
-        String nodeFSync = context.getResources().getString(R.string.node_fsync_switch);
-        if (Utils.fileWritable(nodeFSync)) {
+        if (Utils.fileWritable(Nodes.nodeFSync(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_FSYNC, true);
-            Utils.writeValue(nodeFSync, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeFSync(context), value ? "1" : "0");
         }
     }
 
     // Adrenoboost preference
     public static void restoreAdrenoboostSetting(Context context) {
-        String nodeAdrenoboost = context.getResources().getString(R.string.node_adrenoboost_preference);
-        if (Utils.fileWritable(nodeAdrenoboost)) {
+        if (Utils.fileWritable(Nodes.nodeAdrenoboost(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_ADRENOBOOST,
-                Integer.parseInt(Utils.getFileValue(nodeAdrenoboost, ADRENOBOOST_DEFAULT)));
-            Utils.writeValue(nodeAdrenoboost, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeAdrenoboost(context), ADRENOBOOST_DEFAULT)));
+            Utils.writeValue(Nodes.nodeAdrenoboost(context), String.valueOf(value));
         }
     }
 
     // Powershare switch
     public static void restorePowershareSetting(Context context) {
-        String nodePowershare = context.getResources().getString(R.string.node_powershare_switch);
-        if (Utils.fileWritable(nodePowershare)) {
+        if (Utils.fileWritable(Nodes.nodePowershare(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_POWERSHARE, false);
-            Utils.writeValue(nodePowershare, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodePowershare(context), value ? "1" : "0");
         }
     }
 
     // OEM wireless charger quiet mode switch
     public static void restoreQuietModeSetting(Context context) {
-        String nodeQuietMode = context.getResources().getString(R.string.node_quiet_mode_switch);
-        if (Utils.fileWritable(nodeQuietMode)) {
+        if (Utils.fileWritable(Nodes.nodeQuietMode(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_QUIET_MODE, false);
-            Utils.writeValue(nodeQuietMode, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeQuietMode(context), value ? "1" : "0");
         }
     }
 
     // Mic gain preference
     public static void restoreMicGainSetting(Context context) {
-        String nodeMicGain = context.getResources().getString(R.string.node_microphone_gain_preference);
-        if (Utils.fileWritable(nodeMicGain)) {
+        if (Utils.fileWritable(Nodes.nodeMicGain(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_MIC_GAIN,
-                Integer.parseInt(Utils.getFileValue(nodeMicGain, MIC_GAIN_DEFAULT)));
-            Utils.writeValue(nodeMicGain, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeMicGain(context), MIC_GAIN_DEFAULT)));
+            Utils.writeValue(Nodes.nodeMicGain(context), String.valueOf(value));
         }
     }
 
     // Speaker gain preference
     public static void restoreSpeakerGainSetting(Context context) {
-        String nodeSpeakerGain = context.getResources().getString(R.string.node_speaker_gain_preference);
-        if (Utils.fileWritable(nodeSpeakerGain)) {
+        if (Utils.fileWritable(Nodes.nodeSpeakerGain(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_SPEAKER_GAIN,
-                Integer.parseInt(Utils.getFileValue(nodeSpeakerGain, SPEAKER_GAIN_DEFAULT)));
-            Utils.writeValue(nodeSpeakerGain, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeSpeakerGain(context), SPEAKER_GAIN_DEFAULT)));
+            Utils.writeValue(Nodes.nodeSpeakerGain(context), String.valueOf(value));
         }
     }
 
     // Edge limit switch
     public static void restoreEdgeLimitSetting(Context context) {
-        String nodeEdgeLimit = context.getResources().getString(R.string.node_edge_limit_switch);
-        if (Utils.fileWritable(nodeEdgeLimit)) {
+        if (Utils.fileWritable(Nodes.nodeEdgeLimit(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_EDGE_LIMIT, false);
-            Utils.writeValue(nodeEdgeLimit, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeEdgeLimit(context), value ? "1" : "0");
         }
     }
 
     // High touch polling rate switch
     public static void restoreHighTouchPollingRateSetting(Context context) {
-        String nodeHighTouchPollingRate = context.getResources().getString(R.string.node_high_touch_polling_rate_switch);
-        if (Utils.fileWritable(nodeHighTouchPollingRate)) {
+        if (Utils.fileWritable(Nodes.nodeHighTouchPollingRate(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_HIGH_TOUCH_POLLING_RATE, false);
-            Utils.writeValue(nodeHighTouchPollingRate, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeHighTouchPollingRate(context), value ? "1" : "0");
         }
     }
 
     // USB 2.0 fast charge switch
     public static void restoreFastChargeSetting(Context context) {
-        String nodeUSB2FastCharge = context.getResources().getString(R.string.node_usb2_fast_charge_switch);
-        if (Utils.fileWritable(nodeUSB2FastCharge)) {
+        if (Utils.fileWritable(Nodes.nodeUSB2FastCharge(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_USB2_FAST_CHARGE, false);
-            Utils.writeValue(nodeUSB2FastCharge, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeUSB2FastCharge(context), value ? "1" : "0");
         }
     }
 
     // USB-OTG switch
     public static void restoreOTGSetting(Context context) {
-        String nodeOTG = context.getResources().getString(R.string.node_usb_otg_switch);
-        if (Utils.fileWritable(nodeOTG)) {
+        if (Utils.fileWritable(Nodes.nodeOTG(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             boolean value = sharedPrefs.getBoolean(KEY_USB_OTG, false);
-            Utils.writeValue(nodeOTG, value ? "1" : "0");
+            Utils.writeValue(Nodes.nodeOTG(context), value ? "1" : "0");
         }
     }
 
     // Vibrator strength preference
     public static void restoreVibratorStrengthSetting(Context context) {
-        String nodeVibratorStrength = context.getResources().getString(R.string.node_vibrator_strength_preference);
-        if (Utils.fileWritable(nodeVibratorStrength)) {
+        if (Utils.fileWritable(Nodes.nodeVibratorStrength(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_VIBRATOR_STRENGTH,
-                Integer.parseInt(Utils.getFileValue(nodeVibratorStrength, VIBRATOR_STRENGTH_DEFAULT)));
-            Utils.writeValue(nodeVibratorStrength, String.valueOf(value));
+                Integer.parseInt(Utils.getFileValue(Nodes.nodeVibratorStrength(context), VIBRATOR_STRENGTH_DEFAULT)));
+            Utils.writeValue(Nodes.nodeVibratorStrength(context), String.valueOf(value));
         }
     }
 

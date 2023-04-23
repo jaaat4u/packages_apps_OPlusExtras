@@ -1,9 +1,12 @@
 /*
  * Copyright (C) 2018-2022 crDroid Android Project
+ *               2023 The Evolution X Project
  * SPDX-License-Identifier: Apache-2.0
  */
 
 package org.evolution.oplus.OPlusExtras.utils;
+
+import android.content.Context;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
+
+import org.evolution.oplus.OPlusExtras.R;
 
 import android.util.Log;
 
@@ -107,5 +112,16 @@ public class Utils {
             }
         }
         return line;
+    }
+
+    /**
+     * Retrieves the string value associated with the specified resource ID for the given context.
+     *
+     * @param context The context used to retrieve the resource string.
+     * @param resId   The resource ID for the string value to retrieve.
+     * @return The string value associated with the specified resource ID.
+     */
+    public static String getNode(Context context, int resId) {
+        return context.getResources().getString(resId);
     }
 }
