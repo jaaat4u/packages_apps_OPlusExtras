@@ -46,7 +46,18 @@ public class OPlusExtrasActivity extends CollapsingToolbarBaseActivity
                 new OPlusExtras(), TAG).commit();
 
         mShakeUtils = new ShakeUtils(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         mShakeUtils.bindShakeListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mShakeUtils.unBindShakeListener(this);
     }
 
     @Override
