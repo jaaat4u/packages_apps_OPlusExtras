@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018-2022 crDroid Android Project
+ * Copyright (C) 2016 The CyanogenMod Project
+ *               2018-2022 crDroid Android Project
  *               2023 The Evolution X Project
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -24,6 +25,36 @@ public class Utils {
     private static final String TAG = Utils.class.getSimpleName();
 
     /**
+     * Reads the first line of text from the given file.
+     * Reference {@link BufferedReader#readLine()} for clarification on what a line is
+     *
+     * @return the read line contents, or null on failure
+     */
+    public static String readOneLine(String fileName) {
+        String line = null;
+        BufferedReader reader = null;
+
+        try {
+            reader = new BufferedReader(new FileReader(fileName), 512);
+            line = reader.readLine();
+        } catch (FileNotFoundException e) {
+            Log.w(TAG, "No such file " + fileName + " for reading", e);
+        } catch (IOException e) {
+            Log.e(TAG, "Could not read from file " + fileName, e);
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                // Ignored, not much we can do anyway
+            }
+        }
+
+        return line;
+    }
+
+    /**
      * Write a string value to the specified file.
      * @param filename      The filename
      * @param value         The value
@@ -44,31 +75,15 @@ public class Utils {
         }
     }
 
-    public static String readLine(String filename) {
-        if (filename == null) {
-            return null;
-        }
-        BufferedReader br = null;
-        String line = null;
-        try {
-            br = new BufferedReader(new FileReader(filename), 1024);
-            line = br.readLine();
-        } catch (IOException e) {
-            return null;
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
-        }
-        return line;
-    }
-
+    /**
+     * Returns the contents of the file with the given filename, or the specified default value if the file cannot be read.
+     *
+     * @param filename the name of the file to read
+     * @param defValue the default value to return if the file cannot be read
+     * @return the contents of the file as a String, or the default value if the file cannot be read
+     */
     public static String getFileValue(String filename, String defValue) {
-        String fileValue = readLine(filename);
+        String fileValue = readOneLine(filename);
         if (fileValue != null) {
             return fileValue;
         }
@@ -76,42 +91,33 @@ public class Utils {
     }
 
     /**
-     * Check if the specified file exists.
-     * @param filename      The filename
-     * @return              Whether the file exists or not
+     * Checks whether the given file exists
+     *
+     * @return true if exists, false if not
      */
-    public static boolean fileExists(String filename) {
-        if (filename == null) {
-            return false;
-        }
-        return new File(filename).exists();
+    public static boolean fileExists(String fileName) {
+        final File file = new File(fileName);
+        return file.exists();
     }
 
-    public static boolean fileWritable(String filename) {
-        return fileExists(filename) && new File(filename).canWrite();
+    /**
+     * Checks whether the given file is readable
+     *
+     * @return true if readable, false if not
+     */
+    public static boolean isFileReadable(String fileName) {
+        final File file = new File(fileName);
+        return file.exists() && file.canRead();
     }
 
-    public static String readOneLine(String fileName) {
-        String line = "0";
-        BufferedReader reader = null;
-
-        try {
-            reader = new BufferedReader(new FileReader(fileName), 512);
-            line = reader.readLine();
-        } catch (FileNotFoundException e) {
-            Log.w(TAG, "No such file " + fileName + " for reading", e);
-        } catch (IOException e) {
-            Log.e(TAG, "Could not read from file " + fileName, e);
-        } finally {
-            try {
-                if (reader != null) {
-                    reader.close();
-                }
-            } catch (IOException e) {
-                // Ignored, not much we can do anyway
-            }
-        }
-        return line;
+    /**
+     * Checks whether the given file is writable
+     *
+     * @return true if writable, false if not
+     */
+    public static boolean isFileWritable(String fileName) {
+        final File file = new File(fileName);
+        return file.exists() && file.canWrite();
     }
 
     /**

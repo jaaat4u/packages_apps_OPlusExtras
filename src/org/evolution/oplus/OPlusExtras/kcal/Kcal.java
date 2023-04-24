@@ -69,7 +69,7 @@ public class Kcal extends PreferenceFragment
 
         // Red preference
         mRedPreference =  (CustomSeekBarPreference) findPreference(KEY_RED);
-        if (Utils.fileWritable(KcalNodes.nodeRed(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeRed(context))) {
             mRedPreference.setValue(sharedPrefs.getInt(KEY_RED,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeRed(context), RED_DEFAULT))));
             mRedPreference.setOnPreferenceChangeListener(this);
@@ -79,7 +79,7 @@ public class Kcal extends PreferenceFragment
 
         // Green preference
         mGreenPreference =  (CustomSeekBarPreference) findPreference(KEY_GREEN);
-        if (Utils.fileWritable(KcalNodes.nodeGreen(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeGreen(context))) {
             mGreenPreference.setValue(sharedPrefs.getInt(KEY_GREEN,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeGreen(context), GREEN_DEFAULT))));
             mGreenPreference.setOnPreferenceChangeListener(this);
@@ -89,7 +89,7 @@ public class Kcal extends PreferenceFragment
 
         // Blue preference
         mBluePreference =  (CustomSeekBarPreference) findPreference(KEY_BLUE);
-        if (Utils.fileWritable(KcalNodes.nodeBlue(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeBlue(context))) {
             mBluePreference.setValue(sharedPrefs.getInt(KEY_BLUE,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeBlue(context), BLUE_DEFAULT))));
             mBluePreference.setOnPreferenceChangeListener(this);
@@ -99,7 +99,7 @@ public class Kcal extends PreferenceFragment
 
         // Saturation preference
         mSaturationPreference =  (CustomSeekBarPreference) findPreference(KEY_SATURATION);
-        if (Utils.fileWritable(KcalNodes.nodeSaturation(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeSaturation(context))) {
             mSaturationPreference.setValue(sharedPrefs.getInt(KEY_SATURATION,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeSaturation(context), SATURATION_DEFAULT))));
             mSaturationPreference.setOnPreferenceChangeListener(this);
@@ -109,7 +109,7 @@ public class Kcal extends PreferenceFragment
 
         // Contrast preference
         mContrastPreference =  (CustomSeekBarPreference) findPreference(KEY_CONTRAST);
-        if (Utils.fileWritable(KcalNodes.nodeContrast(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeContrast(context))) {
             mContrastPreference.setValue(sharedPrefs.getInt(KEY_CONTRAST,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeContrast(context), CONTRAST_DEFAULT))));
             mContrastPreference.setOnPreferenceChangeListener(this);
@@ -119,7 +119,7 @@ public class Kcal extends PreferenceFragment
 
         // Hue preference
         mHuePreference =  (CustomSeekBarPreference) findPreference(KEY_HUE);
-        if (Utils.fileWritable(KcalNodes.nodeHue(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeHue(context))) {
             mHuePreference.setValue(sharedPrefs.getInt(KEY_HUE,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeHue(context), HUE_DEFAULT))));
             mHuePreference.setOnPreferenceChangeListener(this);
@@ -129,7 +129,7 @@ public class Kcal extends PreferenceFragment
 
         // Value preference
         mValuePreference =  (CustomSeekBarPreference) findPreference(KEY_VALUE);
-        if (Utils.fileWritable(KcalNodes.nodeValue(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeValue(context))) {
             mValuePreference.setValue(sharedPrefs.getInt(KEY_VALUE,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeValue(context), VALUE_DEFAULT))));
             mValuePreference.setOnPreferenceChangeListener(this);
@@ -196,7 +196,7 @@ public class Kcal extends PreferenceFragment
 
     // Red preference
     public static void restoreRedSetting(Context context) {
-        if (Utils.fileWritable(KcalNodes.nodeRed(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeRed(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_RED,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeRed(context), RED_DEFAULT)));
@@ -206,7 +206,7 @@ public class Kcal extends PreferenceFragment
 
     // Green preference
     public static void restoreGreenSetting(Context context) {
-        if (Utils.fileWritable(KcalNodes.nodeGreen(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeGreen(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_GREEN,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeGreen(context), GREEN_DEFAULT)));
@@ -216,7 +216,7 @@ public class Kcal extends PreferenceFragment
 
     // Blue preference
     public static void restoreBlueSetting(Context context) {
-        if (Utils.fileWritable(KcalNodes.nodeBlue(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeBlue(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_BLUE,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeBlue(context), BLUE_DEFAULT)));
@@ -226,7 +226,7 @@ public class Kcal extends PreferenceFragment
 
     // Saturation preference
     public static void restoreSaturationSetting(Context context) {
-        if (Utils.fileWritable(KcalNodes.nodeSaturation(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeSaturation(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_SATURATION,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeSaturation(context), SATURATION_DEFAULT)));
@@ -236,7 +236,7 @@ public class Kcal extends PreferenceFragment
 
     // Contrast preference
     public static void restoreContrastSetting(Context context) {
-        if (Utils.fileWritable(KcalNodes.nodeContrast(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeContrast(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_CONTRAST,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeContrast(context), CONTRAST_DEFAULT)));
@@ -246,7 +246,7 @@ public class Kcal extends PreferenceFragment
 
     // Hue preference
     public static void restoreHueSetting(Context context) {
-        if (Utils.fileWritable(KcalNodes.nodeHue(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeHue(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_HUE,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeHue(context), HUE_DEFAULT)));
@@ -256,7 +256,7 @@ public class Kcal extends PreferenceFragment
 
     // Value preference
     public static void restoreValueSetting(Context context) {
-        if (Utils.fileWritable(KcalNodes.nodeValue(context))) {
+        if (Utils.isFileWritable(KcalNodes.nodeValue(context))) {
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
             int value = sharedPrefs.getInt(KEY_VALUE,
                 Integer.parseInt(Utils.getFileValue(KcalNodes.nodeValue(context), VALUE_DEFAULT)));
